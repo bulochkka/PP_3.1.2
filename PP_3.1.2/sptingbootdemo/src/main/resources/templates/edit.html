@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<meta charset="UTF-8">
+<head>
+    <title>Edit User</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            width: 50%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="firstName"],
+        input[type="submit"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<form th:action="@{/id/update}" th:method="POST" th:object="${user}">
+    <input th:field="*{id}" type="hidden"/>
+    <label for="firstName"> Enter name: </label>
+    <input id="firstName" th:field="*{firstName}" type="text"/>
+    <div style="color:red" th:errors="*{firstName}" th:if="${#fields.hasErrors('firstName')}">Name Error</div>
+    <br/>
+    <label for="lastName"> Enter lastName: </label>
+    <input id="lastName" th:field="*{lastName}" type="text"/>
+    <div style="color:red" th:errors="*{lastName}" th:if="${#fields.hasErrors('lastName')}">LastName Error</div>
+    <br/>
+    <label for="age"> Enter age: </label>
+    <input id="age" th:field="*{age}" type="text"/>
+    <div style="color:red" th:errors="*{age}" th:if="${#fields.hasErrors('age')}">Age Error</div>
+    <br/>
+    <input type="submit" value="Update user!"/>
+</form>
+<br/>
+<form th:action="@{/id/delete(id=${user.getId()})}" th:method="POST">
+    <input type="submit" value="Delete!"/>
+</form>
+</body>
+</html>
